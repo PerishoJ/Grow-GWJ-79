@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0q6t4ph16xd2"]
+
+[ext_resource type="Script" path="res://BotController.gd" id="2_uvvf6"]
+[ext_resource type="PackedScene" uid="uid://bnmtechbehhh4" path="res://TestScene.tscn" id="3_57vfi"]
+[ext_resource type="PackedScene" uid="uid://buy4rtqs2m2qb" path="res://OrbitCamera.tscn" id="3_wvqdb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0ta6s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sn1m"]
+albedo_color = Color(0, 0.00392157, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dwb7v"]
+material = SubResource("StandardMaterial3D_2sn1m")
+height = 1.0
+radial_segments = 8
+rings = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0y5lv"]
+albedo_color = Color(0, 0.196078, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wf1tc"]
+material = SubResource("StandardMaterial3D_0y5lv")
+radius = 0.2
+height = 0.5
+radial_segments = 4
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vabye"]
+albedo_color = Color(0, 0.435294, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_apvfp"]
+material = SubResource("StandardMaterial3D_vabye")
+radial_segments = 4
+rings = 3
+
+[node name="Level_Test" type="Node3D"]
+
+[node name="Bot" type="CharacterBody3D" parent="."]
+script = ExtResource("2_uvvf6")
+
+[node name="CameraBase" type="Node3D" parent="Bot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0ta6s")
+
+[node name="body" type="MeshInstance3D" parent="Bot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_dwb7v")
+
+[node name="head" type="MeshInstance3D" parent="Bot"]
+transform = Transform3D(0.996711, 0, 0, 0, 1.99687, 0, 0, 0, 0.996711, 0, 2.0112, 0)
+mesh = SubResource("CapsuleMesh_wf1tc")
+
+[node name="face" type="MeshInstance3D" parent="Bot"]
+transform = Transform3D(0.433782, 0, 0, 0, -6.0141e-09, -0.594484, 0, 0.137587, -2.59857e-08, 0, 2.00993, -0.151813)
+mesh = SubResource("CylinderMesh_apvfp")
+
+[node name="Player" type="Node" parent="."]
+
+[node name="BaseTestScene" parent="." instance=ExtResource("3_57vfi")]
+
+[node name="CameraPivot" parent="." instance=ExtResource("3_wvqdb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0162582, -0.0473452, -0.0305738)

@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnmtechbehhh4"]
+
+[ext_resource type="Texture2D" uid="uid://di3h1yoi18afj" path="res://textures/checkboard.jpeg" id="1_hxid3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sb6tb"]
+size = Vector3(32, 1, 32)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1k2qd"]
+albedo_texture = ExtResource("1_hxid3")
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2sp7v"]
+size = Vector3(32, 1, 32)
+
+[sub_resource type="Environment" id="Environment_jsaa5"]
+background_color = Color(0, 0.333333, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.792157, 0.819608, 0.803922, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TestFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestFloor"]
+shape = SubResource("BoxShape3D_sb6tb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestFloor"]
+material_override = SubResource("StandardMaterial3D_1k2qd")
+mesh = SubResource("BoxMesh_2sp7v")
+skeleton = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jsaa5")

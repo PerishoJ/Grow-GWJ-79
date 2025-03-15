@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://buy4rtqs2m2qb"]
+
+[ext_resource type="Script" path="res://CameraController.gd" id="1_30bmg"]
+[ext_resource type="Script" path="res://CameraFollow.gd" id="2_42hx4"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_sxe24"]
+
+[node name="CameraPivot" type="Node3D"]
+script = ExtResource("1_30bmg")
+zoom_sensitivity = 0.5
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target_position")]
+script = ExtResource("2_42hx4")
+target_position = NodePath("../SpringArm3D/CameraFollowPoint")
+lerp_power = 8.0
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+top_level = true
+shape = SubResource("SeparationRayShape3D_sxe24")
+spring_length = 0.3
+
+[node name="CameraFollowPoint" type="Node3D" parent="SpringArm3D"]
