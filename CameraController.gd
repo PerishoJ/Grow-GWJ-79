@@ -1,6 +1,6 @@
 extends Node3D
 
-# Tutorial https://www.youtube.com/watch?v=ZCb12AHKMfE
+# Camera Move Tutorial https://www.youtube.com/watch?v=ZCb12AHKMfE
 
 @export var camera_sensitivity: float = 0.005
 @export var zoom_sensitivity: float
@@ -29,6 +29,8 @@ func _process(delta):
 
 
 func botSelect():
+  # Select From Camera
+  # Ref https://forum.godotengine.org/t/godot-4-how-to-cast-a-ray-from-mouse-position-towards-camera-orientation-in-3d/5280/2
   var mouse_pos = get_viewport().get_mouse_position()
   var ray_length = 100
   var from = camera.project_ray_origin(mouse_pos)
