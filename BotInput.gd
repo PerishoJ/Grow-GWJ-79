@@ -3,7 +3,7 @@ class_name BotInput
 extends RefCounted
 
 ## The forward/Backward values given, from th point of view of the camera (player)
-var movement: Vector3
+var movement: Vector2
 ## Whether the jump key was just pressed
 var jump: bool
 ## The global angle of the player's camera

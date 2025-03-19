@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0q6t4ph16xd2"]
+[gd_scene load_steps=12 format=3 uid="uid://d0q6t4ph16xd2"]
 
+[ext_resource type="Script" path="res://Player.gd" id="2_00k5f"]
 [ext_resource type="Script" path="res://BotController.gd" id="2_uvvf6"]
 [ext_resource type="PackedScene" uid="uid://bnmtechbehhh4" path="res://TestScene.tscn" id="3_57vfi"]
 [ext_resource type="PackedScene" uid="uid://buy4rtqs2m2qb" path="res://OrbitCamera.tscn" id="3_wvqdb"]
@@ -45,21 +46,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_0ta6s")
 
-[node name="body" type="MeshInstance3D" parent="Bot"]
+[node name="MeshSkeleton" type="Node3D" parent="Bot"]
+
+[node name="body" type="MeshInstance3D" parent="Bot/MeshSkeleton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CylinderMesh_dwb7v")
+skeleton = NodePath("../..")
 
-[node name="head" type="MeshInstance3D" parent="Bot"]
+[node name="head" type="MeshInstance3D" parent="Bot/MeshSkeleton"]
 transform = Transform3D(0.996711, 0, 0, 0, 1.99687, 0, 0, 0, 0.996711, 0, 2.0112, 0)
 mesh = SubResource("CapsuleMesh_wf1tc")
+skeleton = NodePath("../..")
 
-[node name="face" type="MeshInstance3D" parent="Bot"]
+[node name="face" type="MeshInstance3D" parent="Bot/MeshSkeleton"]
 transform = Transform3D(0.433782, 0, 0, 0, -6.0141e-09, -0.594484, 0, 0.137587, -2.59857e-08, 0, 2.00993, -0.151813)
 mesh = SubResource("CylinderMesh_apvfp")
+skeleton = NodePath("../..")
 
-[node name="Player" type="Node" parent="."]
+[node name="Player" type="Node" parent="." node_paths=PackedStringArray("bot")]
+script = ExtResource("2_00k5f")
+bot = NodePath("../Bot")
+
+[node name="CameraPivot" parent="Player" instance=ExtResource("3_wvqdb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0162582, -0.0473452, -0.0305738)
 
 [node name="BaseTestScene" parent="." instance=ExtResource("3_57vfi")]
-
-[node name="CameraPivot" parent="." instance=ExtResource("3_wvqdb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0162582, -0.0473452, -0.0305738)
