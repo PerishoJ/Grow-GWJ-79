@@ -1,9 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0q6t4ph16xd2"]
+[gd_scene load_steps=15 format=3 uid="uid://d0q6t4ph16xd2"]
 
 [ext_resource type="Script" path="res://Player.gd" id="2_00k5f"]
+[ext_resource type="Texture2D" uid="uid://dvv0ri3vtmy72" path="res://coffee.png" id="2_24gie"]
 [ext_resource type="Script" path="res://BotController.gd" id="2_uvvf6"]
 [ext_resource type="PackedScene" uid="uid://bnmtechbehhh4" path="res://TestScene.tscn" id="3_57vfi"]
 [ext_resource type="PackedScene" uid="uid://buy4rtqs2m2qb" path="res://OrbitCamera.tscn" id="3_wvqdb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpmff"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+albedo_texture = ExtResource("2_24gie")
+billboard_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aalsh"]
+material = SubResource("StandardMaterial3D_mpmff")
+size = Vector2(1, 1)
+orientation = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0ta6s"]
 
@@ -41,6 +54,10 @@ script = ExtResource("2_uvvf6")
 
 [node name="CameraBase" type="Node3D" parent="Bot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="TempMarkers" type="MeshInstance3D" parent="Bot/CameraBase"]
+transform = Transform3D(0.325644, 0, 0, 0, 0.325644, 0, 0, 0, 0.325644, 0.00893092, 1.24746, -0.198691)
+mesh = SubResource("PlaneMesh_aalsh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
