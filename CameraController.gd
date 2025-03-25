@@ -8,6 +8,9 @@ extends Node3D
 @onready var camera := $Camera
 @onready var spring_arm := $SpringArm3D
 
+## Sends colliders
+signal change_bot_request
+
 func _ready():
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -42,8 +45,11 @@ func botSelect():
   ray_query.collide_with_areas = true
   var raycast_result = space.intersect_ray(ray_query)
   if raycast_result != null and raycast_result.has("collider"):
-    print( raycast_result.collider.get_name() )
-
+    # If you click on a bot, you switch control to that one
+    if(raycast_result.collider is BotController):
+      change_bot_request.emit( raycast_result.collider )
+      
+      
 func toggleSelectMode():
     if Input.is_action_just_pressed("switch") :
       Input.mouse_mode = Input.MOUSE_MODE_CONFINED

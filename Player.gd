@@ -28,5 +28,8 @@ func _get_player_input():
 func _follow_bot(delta):
   var target = (bot.get_node("CameraBase") as Node3D).global_position
   cameraPivot.position = lerp(cameraPivot.position, target , delta * camera_follow_aggressiveness)
-  # TODO in would be neat to add some camera shake just to keep things more interesting.
-  print(str(target))
+
+
+func _on_camera_pivot_change_bot_request(collision):
+  bot = collision ; 
+  pass # Replace with function body.
