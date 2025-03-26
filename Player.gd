@@ -13,7 +13,7 @@ func _process(delta):
   
 func _physics_process(delta):
   if bot :
-    bot.handleInput(_get_player_input(), delta)
+    bot.handleInput(_get_player_input())
     _follow_bot(delta)
   pass
 
