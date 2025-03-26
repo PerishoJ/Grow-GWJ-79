@@ -31,5 +31,13 @@ func _follow_bot(delta):
 
 
 func _on_camera_pivot_change_bot_request(collision):
-  bot = collision ; 
+  set_cursor_visibility(bot , false)
+  bot = collision ;
+  set_cursor_visibility(collision , true)
   pass # Replace with function body.
+
+
+func set_cursor_visibility( targetBot , isVisible):
+  if targetBot :
+    var oldMarker : MeshInstance3D = targetBot.find_child("CameraBase").find_child("TempMarkers")
+    oldMarker.visible = isVisible

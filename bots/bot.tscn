@@ -52,6 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="TempMarkers" type="MeshInstance3D" parent="CameraBase"]
 transform = Transform3D(0.325644, 0, 0, 0, 0.325644, 0, 0, 0, 0.325644, 0.00893092, 1.24746, -0.198691)
+visible = false
 mesh = SubResource("PlaneMesh_aalsh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
