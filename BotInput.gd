@@ -8,3 +8,5 @@ var movement: Vector2
 var jump: bool
 ## The global angle of the player's camera
 var referenceYAngle: float
+## Timestamp this command becomes no-good. reference since startup  
+var expire_time: int

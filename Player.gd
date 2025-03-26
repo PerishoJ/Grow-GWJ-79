@@ -2,6 +2,7 @@ extends Node
 @export var camera_follow_aggressiveness : float = 2
 @export var bot : BotController
 @onready var cameraPivot : Node3D = $CameraPivot
+const INPUT_EXPIREY_MILLIS: int = 200
 # Called when the node enters the scene tree for the first time.
 func _ready():
   pass # Replace with function body.
@@ -23,6 +24,7 @@ func _get_player_input():
   input.movement = Input.get_vector("left","right","up","down")
   input.jump = Input.is_action_just_pressed("jump")
   input.referenceYAngle = cameraPivot.rotation.y
+  input.expire_time = Time.get_ticks_msec() + INPUT_EXPIREY_MILLIS;
   return input
   
 func _follow_bot(delta):
