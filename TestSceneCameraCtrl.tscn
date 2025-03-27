@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0q6t4ph16xd2"]
 
 [ext_resource type="PackedScene" uid="uid://bt5rmy2ff3pmx" path="res://bots/bot.tscn" id="1_rjt5k"]
-[ext_resource type="Script" path="res://Player.gd" id="2_00k5f"]
+[ext_resource type="Script" uid="uid://cp04ly6wuhpbq" path="res://Player.gd" id="2_00k5f"]
 [ext_resource type="PackedScene" uid="uid://bnmtechbehhh4" path="res://TestScene.tscn" id="3_57vfi"]
 [ext_resource type="PackedScene" uid="uid://buy4rtqs2m2qb" path="res://OrbitCamera.tscn" id="3_wvqdb"]
 

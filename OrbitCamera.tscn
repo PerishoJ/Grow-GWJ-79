@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://buy4rtqs2m2qb"]
 
-[ext_resource type="Script" path="res://CameraController.gd" id="1_30bmg"]
-[ext_resource type="Script" path="res://CameraFollow.gd" id="2_42hx4"]
+[ext_resource type="Script" uid="uid://eina8iagkrbs" path="res://CameraController.gd" id="1_30bmg"]
+[ext_resource type="Script" uid="uid://cqq7pw0al6n5u" path="res://CameraFollow.gd" id="2_42hx4"]
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_sxe24"]
 

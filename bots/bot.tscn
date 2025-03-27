@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bt5rmy2ff3pmx"]
 
-[ext_resource type="Script" path="res://BotController.gd" id="1_wfgrw"]
+[ext_resource type="Script" uid="uid://bcdpqx3ub64q3" path="res://BotController.gd" id="1_wfgrw"]
 [ext_resource type="Texture2D" uid="uid://dvv0ri3vtmy72" path="res://coffee.png" id="2_taao1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpmff"]
