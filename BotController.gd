@@ -17,11 +17,11 @@ func _physics_process(delta):
   # apply gravity.
   if not is_on_floor():
     velocity.y -= gravity * delta
-  _apply_controller_input( _bot_input, delta)
+  _apply_controller_input( _bot_input)
   move_and_slide()
 
 
-func _apply_controller_input( arg_input , delta):
+func _apply_controller_input( arg_input ):
   if not arg_input or Time.get_ticks_msec() > arg_input.expire_time :
     velocity.x = move_toward(velocity.x, 0, SPEED)
     velocity.z = move_toward(velocity.z, 0, SPEED)
