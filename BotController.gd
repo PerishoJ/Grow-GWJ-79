@@ -4,6 +4,8 @@ class_name BotController
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+signal movement 
+@export var cam_rotation_speed = 0.1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -20,6 +22,7 @@ func _physics_process(delta):
   _apply_controller_input( _bot_input)
   move_and_slide()
 
+var currentDirection : Vector3;
 
 func _apply_controller_input( arg_input ):
   if not arg_input or Time.get_ticks_msec() > arg_input.expire_time :
@@ -33,16 +36,25 @@ func _apply_controller_input( arg_input ):
   # As good practice, you should replace UI actions with custom gameplay actions.
   var input_dir = arg_input.movement
   var direction:Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-  direction = direction.rotated(Vector3.UP, arg_input.referenceYAngle - rotation.y) # Rotate the motion angle to match camera direction
+  direction = direction.rotated(Vector3.UP, arg_input.referenceYAngle - rotation.y)
+  # Rotate the motion angle to match camera direction
   # TODO need to adjust for the input angle so the bot starts going the right direction.
   #   E.g. lerp the y-angle towards the input.rotation so that the robot slowely turns to face the correct direction
   #
   #  ~ Maybe I just want point and click, League style. Hmm
+  
+  # Animation signals here
+  if is_on_floor():
+    movement.emit(direction) # Play movement animations while walking
+  else:
+    movement.emit(Vector3.ZERO) # Don't play movement animations while jumping
+    
   if direction:
     velocity.x = direction.x * SPEED
     velocity.z = direction.z * SPEED
     # Rotate the mesh to point in same direction as camera TODO make this smooth w/ a quaternion lerp, or something
-    mesh_base.rotate_y( arg_input.referenceYAngle - mesh_base.rotation.y )
+    # This probably belongs on the mesh or a dedicated script, but we'll keep it here
+    mesh_base.rotate_y( lerp_angle (0, arg_input.referenceYAngle - mesh_base.rotation.y, cam_rotation_speed ) )
   else:
     velocity.x = move_toward(velocity.x, 0, SPEED)
     velocity.z = move_toward(velocity.z, 0, SPEED)

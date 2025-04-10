@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bt5rmy2ff3pmx"]
+[gd_scene load_steps=16 format=3 uid="uid://bt5rmy2ff3pmx"]
 
 [ext_resource type="Script" uid="uid://bcdpqx3ub64q3" path="res://BotController.gd" id="1_wfgrw"]
 [ext_resource type="Texture2D" uid="uid://dvv0ri3vtmy72" path="res://coffee.png" id="2_taao1"]
+[ext_resource type="Script" uid="uid://cbet7sn1tetxg" path="res://bots/MovementListener.gd" id="3_lgn70"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpmff"]
 transparency = 1
@@ -92,7 +93,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 0.5, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -109,7 +110,8 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_lgn70"]
 resource_name = "bobble"
-length = 3.0
+length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -133,6 +135,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(),
 "update": 0,
 "values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshSkeleton/body:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0), Vector3(0, 0.704948, 0), Vector3(0, 0.5, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5roeb"]
@@ -159,6 +173,7 @@ shape = SubResource("CapsuleShape3D_0ta6s")
 [node name="MeshSkeleton" type="Node3D" parent="."]
 
 [node name="body" type="MeshInstance3D" parent="MeshSkeleton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CylinderMesh_dwb7v")
 skeleton = NodePath("../..")
 
@@ -176,3 +191,10 @@ skeleton = NodePath("../../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_5roeb")
 }
+script = ExtResource("3_lgn70")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24497, 0)
+billboard = 2
+
+[connection signal="movement" from="." to="AnimationPlayer" method="_on_bot_movement"]

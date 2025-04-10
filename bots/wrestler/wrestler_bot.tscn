@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://j5cn6rml7jxj"]
+
+[ext_resource type="Script" uid="uid://bcdpqx3ub64q3" path="res://BotController.gd" id="1_5u1dm"]
+[ext_resource type="Texture2D" uid="uid://dvv0ri3vtmy72" path="res://coffee.png" id="2_k5mpw"]
+[ext_resource type="PackedScene" uid="uid://cwayhvudn3jb5" path="res://bots/wrestler/wrestler.glb" id="3_xd481"]
+[ext_resource type="Script" uid="uid://cbet7sn1tetxg" path="res://bots/MovementListener.gd" id="4_rpl3v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpmff"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+albedo_texture = ExtResource("2_k5mpw")
+billboard_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aalsh"]
+material = SubResource("StandardMaterial3D_mpmff")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0ta6s"]
+
+[sub_resource type="Animation" id="Animation_61x8v"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_lgn70"]
+resource_name = "bobble"
+length = 0.5
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5roeb"]
+_data = {
+&"RESET": SubResource("Animation_61x8v"),
+&"bobble": SubResource("Animation_lgn70")
+}
+
+[node name="Bot" type="CharacterBody3D"]
+script = ExtResource("1_5u1dm")
+
+[node name="CameraBase" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="TempMarkers" type="MeshInstance3D" parent="CameraBase"]
+transform = Transform3D(0.325644, 0, 0, 0, 0.325644, 0, 0, 0, 0.325644, 0.00893092, 1.24746, -0.198691)
+visible = false
+mesh = SubResource("PlaneMesh_aalsh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0ta6s")
+
+[node name="MeshSkeleton" type="Node3D" parent="."]
+
+[node name="wrestler" parent="." instance=ExtResource("3_xd481")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5roeb")
+}
+script = ExtResource("4_rpl3v")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24497, 0)
+billboard = 2
+
+[connection signal="movement" from="." to="AnimationPlayer" method="_on_bot_movement"]

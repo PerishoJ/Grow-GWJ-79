@@ -1,0 +1,200 @@
+[gd_scene load_steps=16 format=3 uid="uid://d3fsh6sv5j71o"]
+
+[ext_resource type="Script" uid="uid://bcdpqx3ub64q3" path="res://BotController.gd" id="1_v3bjk"]
+[ext_resource type="Texture2D" uid="uid://dvv0ri3vtmy72" path="res://coffee.png" id="2_hpgi4"]
+[ext_resource type="Script" uid="uid://cbet7sn1tetxg" path="res://bots/MovementListener.gd" id="3_looy5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpmff"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+albedo_texture = ExtResource("2_hpgi4")
+billboard_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aalsh"]
+material = SubResource("StandardMaterial3D_mpmff")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0ta6s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sn1m"]
+albedo_color = Color(0, 0.00392157, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dwb7v"]
+material = SubResource("StandardMaterial3D_2sn1m")
+height = 1.0
+radial_segments = 8
+rings = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0y5lv"]
+albedo_color = Color(0, 0.196078, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wf1tc"]
+material = SubResource("StandardMaterial3D_0y5lv")
+radius = 0.2
+height = 0.5
+radial_segments = 4
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vabye"]
+albedo_color = Color(0, 0.435294, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_apvfp"]
+material = SubResource("StandardMaterial3D_vabye")
+radial_segments = 4
+rings = 3
+
+[sub_resource type="Animation" id="Animation_61x8v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshSkeleton/body/head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshSkeleton/body/head/face:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.123285)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshSkeleton/body/head:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshSkeleton/body:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeshSkeleton/body:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lgn70"]
+resource_name = "bobble"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshSkeleton/body/head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshSkeleton/body/head/face:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshSkeleton/body:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0), Vector3(0, 0.704948, 0), Vector3(0, 0.5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5roeb"]
+_data = {
+&"RESET": SubResource("Animation_61x8v"),
+&"bobble": SubResource("Animation_lgn70")
+}
+
+[node name="Bot" type="CharacterBody3D"]
+script = ExtResource("1_v3bjk")
+
+[node name="CameraBase" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="TempMarkers" type="MeshInstance3D" parent="CameraBase"]
+transform = Transform3D(0.325644, 0, 0, 0, 0.325644, 0, 0, 0, 0.325644, 0.00893092, 1.24746, -0.198691)
+visible = false
+mesh = SubResource("PlaneMesh_aalsh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0ta6s")
+
+[node name="MeshSkeleton" type="Node3D" parent="."]
+
+[node name="body" type="MeshInstance3D" parent="MeshSkeleton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_dwb7v")
+skeleton = NodePath("../..")
+
+[node name="head" type="MeshInstance3D" parent="MeshSkeleton/body"]
+transform = Transform3D(0.996711, 0, 0, 0, 1.99687, 0, 0, 0, 0.996711, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_wf1tc")
+skeleton = NodePath("../../..")
+
+[node name="face" type="MeshInstance3D" parent="MeshSkeleton/body/head"]
+transform = Transform3D(0.435213, 0, 0, 0, -3.01176e-09, -0.297708, 0, 0.138041, -2.60714e-08, 0, 0, -0.123285)
+mesh = SubResource("CylinderMesh_apvfp")
+skeleton = NodePath("../../../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5roeb")
+}
+script = ExtResource("3_looy5")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24497, 0)
+billboard = 2
+
+[connection signal="movement" from="." to="AnimationPlayer" method="_on_bot_movement"]

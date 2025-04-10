@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Grow-GDWJ-79"
+run/main_scene="uid://1fpolinvhymc"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

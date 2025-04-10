@@ -32,3 +32,7 @@ skeleton = NodePath("../..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jsaa5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.45806, 0.888921, 0, -0.888921, -0.45806, 0, 4.4519, 0)
+light_energy = 1.2

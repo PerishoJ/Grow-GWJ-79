@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://1fpolinvhymc"]
+
+[ext_resource type="PackedScene" uid="uid://bt5rmy2ff3pmx" path="res://bots/bot.tscn" id="1_41jgc"]
+[ext_resource type="Script" uid="uid://cp04ly6wuhpbq" path="res://Player.gd" id="2_ltear"]
+[ext_resource type="PackedScene" uid="uid://buy4rtqs2m2qb" path="res://OrbitCamera.tscn" id="3_bh78j"]
+[ext_resource type="PackedScene" uid="uid://bnmtechbehhh4" path="res://TestScene.tscn" id="4_e40x0"]
+
+[node name="Level_Test" type="Node3D"]
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("2_ltear")
+
+[node name="CameraPivot" parent="Player" instance=ExtResource("3_bh78j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0162582, 2.03197, 2.11511)
+
+[node name="BaseTestScene" parent="." instance=ExtResource("4_e40x0")]
+
+[node name="Bot" parent="." instance=ExtResource("1_41jgc")]
+
+[connection signal="change_bot_request" from="Player/CameraPivot" to="Player" method="_on_camera_pivot_change_bot_request"]
